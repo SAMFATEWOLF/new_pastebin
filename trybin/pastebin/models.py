@@ -20,6 +20,8 @@ class NewPost(models.Model):
                             verbose_name='Теги')
     crt_time = models.DateTimeField(auto_now_add=True,
                                     verbose_name='Время создания')
+    is_published = models.BooleanField(default=True,
+                                       verbose_name='Публикация')
 
 
 

@@ -29,3 +29,16 @@ class ContactForm(forms.Form):
     content = forms.CharField(label='Текст', widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}))
     captcha = CaptchaField(label='Капча')
 
+
+class NewPostForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        self.fields['category'].empty_label = 'Категория не выбрана'
+
+    class Meta:
+        model = NewPost
+        fields = []
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-input'}),
+            'text': forms.Textarea(attrs={'cols': 100, 'rows': 200})
+        }
