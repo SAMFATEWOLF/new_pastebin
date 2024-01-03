@@ -17,5 +17,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(NewPost, NewPostAdmin)
-admin.site.reister(Category, CategoryAdmin)
+admin.site.register(Category, CategoryAdmin)
 # Register your models here.

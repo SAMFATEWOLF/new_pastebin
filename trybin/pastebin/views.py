@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView
 
-from pastebin.forms import RegisterUserForm, LoginUserForm, ContactForm
+from pastebin.forms import RegisterUserForm, LoginUserForm, ContactForm, NewPostForm
 from pastebin.utils import DataMixin
 
 menu = [
@@ -21,6 +21,16 @@ def home(request):
         'menu': menu
     }
     return render(request, 'pastebin/home.html', context=context)
+
+
+class Home(DataMixin, CreateView):
+    form_class = NewPostForm
+    template_name = 'pastebin/home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title='pastebin')
+        return dict(list(context.items()) + list(c_def.items()))
 
 
 class ContactView(DataMixin, FormView):

@@ -34,11 +34,13 @@ class NewPostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__()
         self.fields['category'].empty_label = 'Категория не выбрана'
+        self.fields['privacy'].empty_label = "Установить статус приватности"
+        self.fields['time_to_delete'].empty_label = "Установить время удаления"
 
     class Meta:
         model = NewPost
-        fields = []
+        fields = ['title', 'text', 'category', 'tags', 'privacy', 'time_to_delete', 'is_published']
         widgets = {
             'title': forms.TextInput(attrs={'class':'form-input'}),
-            'text': forms.Textarea(attrs={'cols': 100, 'rows': 200})
+            'text': forms.Textarea(attrs={'cols': 70, 'rows': 20})
         }
